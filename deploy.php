@@ -10,6 +10,7 @@ server('prod', 'snugapps.com', 2222)
     ->password('goindi12')
     //->forwardAgent() // You can use identity key, ssh config, or username/password to auth on the server.
     ->stage('production')
+    ->env('branch', 'master')
     ->env('deploy_path', '/home4/indigo/public_html/exceptioneer'); // Define the base path to deploy your project to.
 
 // Specify the repository from which to download your project's code.
