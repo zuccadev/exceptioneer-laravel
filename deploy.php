@@ -13,6 +13,12 @@ server('prod', 'snugapps.com', 2222)
     ->env('branch', 'master')
     ->env('deploy_path', '/home4/indigo/public_html/exceptioneer'); // Define the base path to deploy your project to.
 
+task('hostgator:change-shell', function () {
+    run('bash');
+});
+
+before('deploy', 'hostgator:change-shell');
+
 // Specify the repository from which to download your project's code.
 // The server needs to have git installed for this to work.
 // If you're not using a forward agent, then the server has to be able to clone
