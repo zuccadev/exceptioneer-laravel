@@ -1,26 +1,24 @@
 <?php
 
-// All Deployer recipes are based on `recipe/common.php`.
 require 'recipe/composer.php';
 
-// Define a server for deployment.
-// Let's name it "prod" and use port 22.
 server('prod', 'snugapps.com', 2222)
     ->user('indigo')
     ->password('goindi12')
-    //->forwardAgent() // You can use identity key, ssh config, or username/password to auth on the server.
     ->stage('production')
     ->env('branch', 'master')
-    ->env('deploy_path', '/home4/indigo/public_html/exceptioneer'); // Define the base path to deploy your project to.
+    ->env('deploy_path', '/home4/indigo/public_html/exceptioneer');
 
-task('hostgator:change-shell', function () {
-    run('bash');
-});
 
-before('deploy', 'hostgator:change-shell');
+task('deploy:vendors', function () {
+    if (commandExist('composer')) {
+        $composer = 'composer';
+    } else {
+        run("cd {{release_path}} && curl -sS https://getcomposer.org/installer | /opt/php55/bin/php");
+        $composer = '/opt/php55/bin/php composer.phar';
+    }
+    run("cd {{release_path}} && {{env_vars}} $composer {{composer_options}}");
+})->desc('Installing vendors');
 
-// Specify the repository from which to download your project's code.
-// The server needs to have git installed for this to work.
-// If you're not using a forward agent, then the server has to be able to clone
-// your project from this repository.
+
 set('repository', 'git@bitbucket.org:psimone/exceptioneer.git');
