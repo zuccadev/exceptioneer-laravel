@@ -3,8 +3,8 @@
 require 'recipe/composer.php';
 
 server('prod', 'snugapps.com', 2222)
-    ->user('indigo')
-    ->password('goindi12')
+    ->user('usr')
+    ->password('pwd')
     ->stage('production')
     ->env('branch', 'master')
     ->env('deploy_path', '/home4/indigo/public_html/exceptioneer');
