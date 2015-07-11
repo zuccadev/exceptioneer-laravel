@@ -6,8 +6,9 @@ if (!file_exists('deploy-config.php')) {
 
 $sshConfig = require 'deploy-config.php';
 
-require 'recipe/composer.php';
+require 'recipe/common.php';
 
+set('shared_dirs', ['public/uploads']);
 server('prod', 'web461.webfaction.com', 22)
     ->user('zzdev')
     ->identityFile($sshConfig['public'], $sshConfig['private'], $sshConfig['passphrase'])
@@ -26,5 +27,17 @@ task('deploy:vendors', function () {
     run("cd {{release_path}} && {{env_vars}} $composer {{composer_options}}");
 
 })->desc('Installing vendors');
+
+
+task('deploy', [
+    'deploy:prepare',
+    'deploy:release',
+    'deploy:update_code',
+    'deploy:shared',
+    'deploy:vendors',
+    'deploy:symlink',
+    'cleanup',
+])->desc('Deploy your project');
+after('deploy', 'success');
 
 set('repository', 'git@bitbucket.org:psimone/exceptioneer.git');
