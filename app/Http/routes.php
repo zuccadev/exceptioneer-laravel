@@ -12,5 +12,5 @@
 */
 
 $app->get('/', function() use ($app) {
-    throw new Exception('This is an exception');
+    throw new \Symfony\Component\HttpKernel\Exception\HttpException(202, 'This is an Exception');
 });

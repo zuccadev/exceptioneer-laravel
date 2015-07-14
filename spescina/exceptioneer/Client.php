@@ -11,8 +11,8 @@ class Client
         $this->httpClient = $httpClient;
     }
 
-    public function send($e)
+    public function send(Notification $notification)
     {
-        $this->httpClient->send($e);
+        $this->httpClient->send($notification);
     }
 }

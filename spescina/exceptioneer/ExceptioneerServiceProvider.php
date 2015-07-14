@@ -18,7 +18,7 @@ class ExceptioneerServiceProvider extends ServiceProvider
 
             $client = new Client($httpClient);
 
-            return new Exceptioneer($client);
+            return new Exceptioneer($client, new Parser());
         });
     }
 

@@ -2,6 +2,6 @@
 
 return [
 
-    'endpoint' => 'http://requestb.in/xm9prxxm'
+    'endpoint' => 'http://requestb.in/vp57qgvp'
 
 ];

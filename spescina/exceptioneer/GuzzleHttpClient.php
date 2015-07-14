@@ -14,9 +14,9 @@ class GuzzleHttpClient implements HttpClientInterface
         $this->client = $client;
     }
 
-    public function send($e)
+    public function send(Notification $notification)
     {
-        $response = $this->client->post(config('exceptioneer.endpoint'), ['json' => ['foo' => 'bar']]);
+        $response = $this->client->post(config('exceptioneer.endpoint'), ['json' => $notification->toArray()]);
 
         dd($response->getBody());
     }

@@ -7,13 +7,19 @@ class Exceptioneer
 {
     protected $client;
 
-    public function __construct(Client $client)
+    protected $parser;
+
+    public function __construct(Client $client, Parser $parser)
     {
         $this->client = $client;
+
+        $this->parser = $parser;
     }
 
     public function report(\Exception $e)
     {
-        $this->client->send($e);
+        $notification = $this->parser->createNotification($e);
+
+        $this->client->send($notification);
     }
 }
