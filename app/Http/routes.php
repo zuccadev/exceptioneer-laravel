@@ -14,3 +14,5 @@
 $app->get('/', function() use ($app) {
     throw new \Symfony\Component\HttpKernel\Exception\HttpException(202, 'This is an Exception');
 });
+
+$app->post('/notifications', ['uses' => 'NotificationsController@create']);

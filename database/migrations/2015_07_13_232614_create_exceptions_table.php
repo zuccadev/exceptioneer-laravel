@@ -12,8 +12,20 @@ class CreateExceptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('exceptions', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('code');
+            $table->string('exception_class');
+            $table->string('message');
+            $table->integer('line');
+            $table->string('file');
+            $table->text('trace');
+            $table->string('path');
+            $table->string('uri');
+            $table->string('method');
+            $table->string('client_ip');
+            $table->text('user_agent');
+            $table->dateTime('time');
             $table->timestamps();
         });
     }
@@ -25,6 +37,6 @@ class CreateExceptionsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('exceptions');
+        Schema::drop('notifications');
     }
 }
