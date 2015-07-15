@@ -3,29 +3,34 @@
 namespace App\Http\Controllers;
 
 use App\Notification;
+use App\Project;
 use Illuminate\Http\Request;
 
 class NotificationsController extends ApiController
 {
     public function create(Request $request)
     {
-        $data = [
-            'code' => $request->input('code'),
-            'exception_class' => $request->input('exceptionClass'),
-            'message' => $request->input('message'),
-            'line' => $request->input('line'),
-            'file' => $request->input('file'),
-            'trace' => serialize($request->input('trace')),
-            'path' => $request->input('path'),
-            'uri' => $request->input('uri'),
-            'method' => $request->input('method'),
-            'client_ip' => $request->input('clientIp'),
-            'user_agent' => $request->input('userAgent'),
-            'time' => $request->input('time'),
-        ];
+        $project = $this->authorize($request);
 
-        $notification = Notification::create($data);
+        if (!$project) {
+            return $this->respondWithError();
+        }
 
-        return $this->respond(['msg' => 'created']);
+        $notification = Notification::createFromRequest($request);
+
+        $project->notifications()->save($notification);
+
+        return $this->respondCreated();
+    }
+
+    protected function authorize(Request $request)
+    {
+        $notifier = $request->input('notifier');
+
+        $apiKey = $notifier['apiKey'];
+
+        $project = Project::where('api_key', '=', $apiKey)->first();
+
+        return $project;
     }
 }

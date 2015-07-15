@@ -16,6 +16,12 @@ class Notification
     public $clientIp;
     public $userAgent;
     public $time;
+    public $apiKey;
+
+    public function __construct($apiKey)
+    {
+        $this->apiKey = $apiKey;
+    }
 
     public function toJson()
     {
@@ -24,6 +30,16 @@ class Notification
 
     public function toArray()
     {
-        return get_object_vars($this);
+        $vars = get_object_vars($this);
+        unset($vars['apiKey']);
+
+        $object = [
+            'notifier' => [
+                'apiKey' => $this->apiKey
+            ],
+            'event' => $vars
+        ];
+
+        return $object;
     }
 }

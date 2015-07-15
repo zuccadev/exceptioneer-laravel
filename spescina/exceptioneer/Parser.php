@@ -7,14 +7,14 @@ use Symfony\Component\HttpFoundation\Request;
 
 class Parser
 {
-    public function createNotification(Exception $e)
+    public function createNotification(Exception $e, $apiKey)
     {
-        return $this->build($e);
+        return $this->build($e, $apiKey);
     }
 
-    protected function build(Exception $e)
+    protected function build(Exception $e, $apiKey)
     {
-        $notification = new Notification();
+        $notification = new Notification($apiKey);
 
         $notification->time = date('c');
 

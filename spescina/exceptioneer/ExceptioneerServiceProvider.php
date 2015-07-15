@@ -1,6 +1,7 @@
 <?php namespace Spescina\Exceptioneer;
 
 use Illuminate\Support\ServiceProvider;
+use Noodlehaus\Config;
 
 class ExceptioneerServiceProvider extends ServiceProvider
 {
@@ -17,8 +18,9 @@ class ExceptioneerServiceProvider extends ServiceProvider
             $httpClient = $this->app->make(HttpClientInterface::class);
 
             $client = new Client($httpClient);
+            $configLoader = new Config(__DIR__ . '/config.php');
 
-            return new Exceptioneer($client, new Parser());
+            return new Exceptioneer($client, new Parser(), $configLoader);
         });
     }
 
