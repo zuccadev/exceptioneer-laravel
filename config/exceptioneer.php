@@ -2,6 +2,6 @@
 
 return [
 
-    'endpoint' => 'http://requestb.in/vp57qgvp'
+    'endpoint' => 'http://localhost/exceptioneer/git/public/notifications'
 
 ];

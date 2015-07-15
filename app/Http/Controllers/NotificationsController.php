@@ -24,7 +24,7 @@ class NotificationsController extends ApiController
             'time' => $request->input('time'),
         ];
 
-        Notification::create($data);
+        $notification = Notification::create($data);
 
         return $this->respond(['msg' => 'created']);
     }
