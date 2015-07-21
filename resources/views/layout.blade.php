@@ -13,7 +13,7 @@
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/flatly/bootstrap.min.css" rel="stylesheet">
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="{{url('css/style.css')}}" rel="stylesheet">
 
 </head>
 <body>
@@ -29,7 +29,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Exceptioneer</a>
+            <a class="navbar-brand" href="{{route('dashboard')}}">Exceptioneer</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -40,7 +40,7 @@
                        aria-expanded="false">Projects <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         @foreach($projects as $p)
-                            <li><a href="{{ route('project', ['id' => $p->id]) }}">{{ $p->name }}</a></li>
+                            <li><a href="{{route('project', ['id' => $p->id])}}">{{$p->name}}</a></li>
                         @endforeach
                     </ul>
                 </li>
@@ -51,7 +51,7 @@
     <!-- /.container-fluid -->
 </nav>
 
-<div class="container-fluid">
+<div class="main-content container-fluid">
     <div class="row">
         <div class="col-md-12">
             @yield('content')
@@ -59,8 +59,16 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    window.onerror = function(error, url, line) {
+        console.log(error, url, line);
+    };
+
+    throw new URIError;
+    console.log(b);
+</script>
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="js/scripts.js"></script>
+<script src="{{url('js/scripts.js')}}"></script>
 </body>
 </html>

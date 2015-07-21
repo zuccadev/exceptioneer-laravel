@@ -15,7 +15,7 @@
             <tr>
                 <td>{{$notification->code}}</td>
                 <td>{{$notification->message}}</td>
-                <td>{{$notification->time}}</td>
+                <td>{{$notification->time->format('d/m/Y H:i:s')}}</td>
             </tr>
         @endforeach
         </tbody>
