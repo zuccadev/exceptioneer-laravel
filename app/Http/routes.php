@@ -11,8 +11,18 @@
 |
 */
 
-$app->get('/', function() use ($app) {
-    throw new \Symfony\Component\HttpKernel\Exception\HttpException(202, 'This is an Exception');
-});
+$app->get('/', ['as' => 'dashboard', function() use ($app) {
+    $projects = App\Project::listing()->get();
+    return view('dashboard', compact('projects'));
+}]);
+
+$app->get('/projects/{id}', ['as' => 'project', function($id) use ($app) {
+    $projects = App\Project::listing()->get();
+    $project = App\Project::with(['notifications' => function($query){
+        return $query->orderBy('time', 'desc');
+    }])->findOrFail($id);
+
+    return view('project', compact('projects', 'project'));
+}]);
 
 $app->post('/notifications', ['uses' => 'NotificationsController@create']);

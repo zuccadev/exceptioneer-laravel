@@ -36,7 +36,7 @@ $app->withEloquent();
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
-    Spescina\Exceptioneer\Handler::class
+    App\Exceptions\Handler::class
 );
 
 $app->singleton(
@@ -80,7 +80,7 @@ $app->singleton(
 
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
-$app->register(Spescina\Exceptioneer\ExceptioneerServiceProvider::class);
+//$app->register(Spescina\Exceptioneer\ExceptioneerServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------

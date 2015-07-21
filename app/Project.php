@@ -16,4 +16,8 @@ class Project extends Eloquent
     {
         return $this->hasMany('App\Notification');
     }
+
+    public function scopeListing($query) {
+        return $query->orderBy('name', 'asc');
+    }
 }

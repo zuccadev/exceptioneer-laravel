@@ -22,6 +22,8 @@ class Notification extends Eloquent
         'time'
     ];
 
+    protected $dates = ['time'];
+
     public function project()
     {
         return $this->belongsTo('App\Project');

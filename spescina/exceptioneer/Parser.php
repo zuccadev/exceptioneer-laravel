@@ -16,7 +16,7 @@ class Parser
     {
         $notification = new Notification($apiKey);
 
-        $notification->time = date('c');
+        $notification->time = date('Y-m-d H:i:s');
 
         $this->parseException($notification, $e);
         $this->parseRequest($notification);
