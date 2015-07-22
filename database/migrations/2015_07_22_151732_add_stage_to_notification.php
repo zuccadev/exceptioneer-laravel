@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProjectsTable extends Migration
+class AddStageToNotification extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,8 @@ class CreateProjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('projects', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('api_key');
-            $table->timestamps();
-        });
-
         Schema::table('notifications', function(Blueprint $table) {
-            $table->integer('project_id')->after('id')->nullable()->unsigned();
+            $table->string('stage')->after('project_id')->nullable();
         });
     }
 
@@ -31,10 +24,8 @@ class CreateProjectsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('projects');
-
         Schema::table('notifications', function(Blueprint $table) {
-            $table->dropColumn('project_id');
+            $table->dropColumn('stage');
         });
     }
 }

@@ -16,6 +16,7 @@ class Notification
     public $clientIp;
     public $userAgent;
     public $time;
+    public $stage;
     public $apiKey;
 
     public function __construct($apiKey)

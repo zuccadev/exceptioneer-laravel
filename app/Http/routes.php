@@ -20,17 +20,29 @@ $app->get('/', ['as' => 'dashboard', function() use ($app) {
     return view('dashboard', compact('projects'));
 }]);
 
-$app->get('/projects/{id}', ['as' => 'project', function($id) use ($app) {
+$app->get('/projects/{id}', ['as' => 'project', function($id, Illuminate\Http\Request $request) use ($app) {
+    $currentStage = $request->input('stage', 'production');
     $projects = App\Project::listing()->get();
     $project = App\Project::findOrFail($id);
-    $notifications = DB::table('notifications')
+
+    $stages =  $project->notifications()
+        ->select('stage')
+        ->groupBy('stage')
+        ->orderBy('stage', 'asc')
+        ->get();
+
+    $notifications = $project->notifications()
         ->select(DB::raw('id, code, method, path, exception_class, message, time, COUNT(id) as occurencies, MIN(time) as first, MAX(time) as last'))
-        ->where('project_id', '=', $project->id)
+        ->ofStage($currentStage)
         ->groupBy(DB::raw('message, method, path'))
         ->orderBy('time', 'desc')
         ->get();
 
-    return view('project', compact('projects', 'project', 'notifications'));
+    $notificationsCount = $project->notifications()
+        ->ofStage($currentStage)
+        ->count();
+
+    return view('project', compact('projects', 'project', 'notifications', 'notificationsCount', 'stages', 'currentStage'));
 }]);
 
 $app->post('/notifications', ['uses' => 'NotificationsController@create']);

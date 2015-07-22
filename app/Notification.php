@@ -19,7 +19,8 @@ class Notification extends Eloquent
         'method',
         'client_ip',
         'user_agent',
-        'time'
+        'time',
+        'stage'
     ];
 
     protected $dates = ['time'];
@@ -27,6 +28,11 @@ class Notification extends Eloquent
     public function project()
     {
         return $this->belongsTo('App\Project');
+    }
+
+    public function scopeOfStage($query, $stage)
+    {
+        return $query->where('stage', '=', $stage);
     }
     
     public static function createFromRequest(Request $request)
@@ -47,6 +53,7 @@ class Notification extends Eloquent
         $object->client_ip = $event['clientIp'];
         $object->user_agent = $event['userAgent'];
         $object->time = $event['time'];
+        $object->stage = $event['stage'];
 
         return $object;
     }

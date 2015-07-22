@@ -28,7 +28,7 @@ class Exceptioneer
     {
         $apiKey = $this->getApiKey();
 
-        $notification = $this->parser->createNotification($e, $apiKey);
+        $notification = $this->parser->createNotification($e, $stage, $apiKey);
 
         $this->client->send($notification);
     }

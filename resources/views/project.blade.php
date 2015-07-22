@@ -3,12 +3,15 @@
 @section('content')
     <div class="row">
         <div class="col-sm-3">
-            <h4>12345 errors</h4>
+            <h4 class="total-errors">{{$notificationsCount}} total errors</h4>
+            @if (count($stages)>1)
             <h6>STAGE</h6>
             <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="?stage=production">Production</a></li>
-                <li><a href="?stage=staging">Staging</a></li>
+                @foreach($stages as $s)
+                <li @if($currentStage === $s->stage) class="active" @endif><a href="?stage={{$s->stage}}">{{$s->stage}}</a></li>
+                @endforeach
             </ul>
+            @endif
         </div>
         <div class="col-sm-9">
             <table class="table table-hover">
@@ -16,7 +19,6 @@
                 <tr>
                     <th>Error</th>
                     <th>Occurencies</th>
-                    <th>Time</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -31,7 +33,6 @@
                             </div>
                         </td>
                         <td>{{$notification->occurencies}}</td>
-                        <td>{{$notification->time}}</td>
                     </tr>
                 @endforeach
                 </tbody>

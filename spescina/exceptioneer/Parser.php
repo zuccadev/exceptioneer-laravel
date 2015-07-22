@@ -7,16 +7,18 @@ use Symfony\Component\HttpFoundation\Request;
 
 class Parser
 {
-    public function createNotification(Exception $e, $apiKey)
+    public function createNotification(Exception $e, $stage, $apiKey)
     {
-        return $this->build($e, $apiKey);
+        return $this->build($e, $stage, $apiKey);
     }
 
-    protected function build(Exception $e, $apiKey)
+    protected function build(Exception $e, $stage = 'production', $apiKey)
     {
         $notification = new Notification($apiKey);
 
         $notification->time = date('Y-m-d H:i:s');
+
+        $notification->stage = $stage;
 
         $this->parseException($notification, $e);
         $this->parseRequest($notification);
