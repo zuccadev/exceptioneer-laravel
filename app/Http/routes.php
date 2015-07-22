@@ -11,6 +11,10 @@
 |
 */
 
+$app->get('/error', [function() use ($app) {
+    throw new \Illuminate\Database\Eloquent\ModelNotFoundException('we', 20);
+}]);
+
 $app->get('/', ['as' => 'dashboard', function() use ($app) {
     $projects = App\Project::listing()->get();
     return view('dashboard', compact('projects'));
@@ -18,11 +22,15 @@ $app->get('/', ['as' => 'dashboard', function() use ($app) {
 
 $app->get('/projects/{id}', ['as' => 'project', function($id) use ($app) {
     $projects = App\Project::listing()->get();
-    $project = App\Project::with(['notifications' => function($query){
-        return $query->orderBy('time', 'desc');
-    }])->findOrFail($id);
+    $project = App\Project::findOrFail($id);
+    $notifications = DB::table('notifications')
+        ->select(DB::raw('id, code, method, path, exception_class, message, time, COUNT(id) as occurencies, MIN(time) as first, MAX(time) as last'))
+        ->where('project_id', '=', $project->id)
+        ->groupBy('message')
+        ->orderBy('time', 'desc')
+        ->get();
 
-    return view('project', compact('projects', 'project'));
+    return view('project', compact('projects', 'project', 'notifications'));
 }]);
 
 $app->post('/notifications', ['uses' => 'NotificationsController@create']);

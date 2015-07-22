@@ -14,7 +14,7 @@ class ExceptioneerServiceProvider extends ServiceProvider
     {
         $this->app->bind('Spescina\Exceptioneer\HttpClientInterface', GuzzleHttpClient::class);
 
-        $this->app->singleton('exceptioneer', function ($app) {
+        $this->app->bind('exceptioneer', function ($app) {
             $httpClient = $this->app->make(HttpClientInterface::class);
 
             $client = new Client($httpClient);
