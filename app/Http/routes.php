@@ -21,7 +21,7 @@ $app->get('/', ['as' => 'dashboard', function() use ($app) {
 }]);
 
 $app->get('/projects/{id}', ['as' => 'project', function($id, Illuminate\Http\Request $request) use ($app) {
-    $paging = 20;
+    $paging = 5;
     $currentStage = $request->input('stage', 'production');
     $projects = App\Project::listing()->get();
     $project = App\Project::findOrFail($id);

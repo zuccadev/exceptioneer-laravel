@@ -27,6 +27,8 @@ class Exceptioneer
     public function report(\Exception $e)
     {
         $apiKey = $this->getApiKey();
+        
+        $stage = $this->getStage();
 
         $notification = $this->parser->createNotification($e, $stage, $apiKey);
 
@@ -36,5 +38,10 @@ class Exceptioneer
     protected function getApiKey()
     {
         return $this->configLoader->get('apiKey');
+    }
+
+    protected function getStage()
+    {
+        return $this->configLoader->get('stage');
     }
 }

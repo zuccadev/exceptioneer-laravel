@@ -2,6 +2,8 @@
 
 return [
 
-    'apiKey' => 'abcdefghilmn'
+    'apiKey' => 'abcdefghilmn',
+
+    'stage' => 'production'
 
 ];

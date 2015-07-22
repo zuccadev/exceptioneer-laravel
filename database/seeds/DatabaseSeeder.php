@@ -14,7 +14,9 @@ class DatabaseSeeder extends Seeder {
 	{
 		Model::unguard();
 
-		// $this->call('UserTableSeeder');
+		factory(App\Project::class, 3)->create()->each(function($p) {
+			$p->notifications()->saveMany(factory(App\Notification::class, 33)->make());
+		});
 	}
 
 }
