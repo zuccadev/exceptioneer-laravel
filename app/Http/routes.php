@@ -21,6 +21,7 @@ $app->get('/', ['as' => 'dashboard', function() use ($app) {
 }]);
 
 $app->get('/projects/{id}', ['as' => 'project', function($id, Illuminate\Http\Request $request) use ($app) {
+    $paging = 20;
     $currentStage = $request->input('stage', 'production');
     $projects = App\Project::listing()->get();
     $project = App\Project::findOrFail($id);
@@ -36,7 +37,7 @@ $app->get('/projects/{id}', ['as' => 'project', function($id, Illuminate\Http\Re
         ->ofStage($currentStage)
         ->groupBy(DB::raw('message, method, path'))
         ->orderBy('time', 'desc')
-        ->get();
+        ->simplePaginate($paging);
 
     $notificationsCount = $project->notifications()
         ->ofStage($currentStage)

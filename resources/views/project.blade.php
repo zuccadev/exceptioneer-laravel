@@ -27,7 +27,7 @@
                         <td>
                             <div>
                                 <?php $className = explode('\\', $notification->exception_class); ?>
-                                <strong>{{end($className)}}</strong> {{$notification->method}} {{$notification->path}}
+                                <strong>{{end($className)}}</strong>&nbsp;&nbsp;&nbsp;{{$notification->method}}&nbsp;&nbsp;&nbsp;{{$notification->path}}
                                 <br>{{$notification->message ? $notification->message : 'no message'}}
                                 <br>{{\Carbon\Carbon::parse($notification->first)->diffForHumans()}} - {{\Carbon\Carbon::parse($notification->last)->diffForHumans()}}
                             </div>
@@ -37,6 +37,7 @@
                 @endforeach
                 </tbody>
             </table>
+            {!! $notifications->render() !!}
         </div>
     </div>
 @endsection

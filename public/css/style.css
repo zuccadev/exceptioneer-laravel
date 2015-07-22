@@ -1,7 +1,13 @@
+.table > thead > tr > th {
+    color: #888;
+}
+
 .table > thead > tr > th,
 .table > tbody > tr > td {
     vertical-align: middle;
     text-align: center;
+    border-bottom: 1px solid #F1F1F1;
+    padding: 20px;
 }
 .table > thead > tr > th:first-child,
 .table > tbody > tr > td:first-child {
