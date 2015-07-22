@@ -15,12 +15,17 @@ $app->get('/error', [function() use ($app) {
     throw new \Illuminate\Database\Eloquent\ModelNotFoundException('we', 20);
 }]);
 
-$app->get('/', ['as' => 'dashboard', function() use ($app) {
+$app->get('/', ['as' => 'projects.index', function() use ($app) {
     $projects = App\Project::listing()->get();
     return view('dashboard', compact('projects'));
 }]);
 
-$app->get('/projects/{id}', ['as' => 'project', function($id, Illuminate\Http\Request $request) use ($app) {
+$app->get('/projects/create', ['as' => 'projects.create', function(){
+    $projects = App\Project::listing()->get();
+    return view('new-project', compact('projects'));
+}]);
+
+$app->get('/projects/{id}', ['as' => 'projects.show', function($id, Illuminate\Http\Request $request) use ($app) {
     $paging = 5;
     $currentStage = $request->input('stage', 'production');
     $projects = App\Project::listing()->get();

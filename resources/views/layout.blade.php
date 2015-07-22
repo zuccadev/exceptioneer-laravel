@@ -30,7 +30,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="{{route('dashboard')}}">Exceptioneer</a>
+                    <a class="navbar-brand" href="{{route('projects.index')}}">Exceptioneer</a>
                 </div>
             </div>
             <div class="col-md-9">
@@ -40,9 +40,11 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                                aria-expanded="false">@if (isset($project)) {{$project->name}} @else Projects @endif<span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                @foreach($projects as $p)
-                                    <li @if(isset($project) && ($p->id === $project->id)) class="disabled" @endif><a href="{{route('project', ['id' => $p->id])}}">{{$p->name}}</a></li>
-                                @endforeach
+                            @foreach($projects as $p)
+                                <li @if(isset($project) && ($p->id === $project->id)) class="disabled" @endif><a href="{{route('projects.show', ['id' => $p->id])}}">{{$p->name}}</a></li>
+                            @endforeach
+                                <li role="separator" class="divider"></li>
+                                <li><a href="{{route('projects.create')}}">Create new</a></li>
                             </ul>
                         </li>
                     </ul>
