@@ -39,6 +39,8 @@ $app->get('/projects/{id}', ['as' => 'project', function($id, Illuminate\Http\Re
         ->orderBy('time', 'desc')
         ->simplePaginate($paging);
 
+    $notifications->setPath($project->id); //fix for a strange bug in pagination. trailing slash appended to current url causes a 301 redirect
+
     $notificationsCount = $project->notifications()
         ->ofStage($currentStage)
         ->count();

@@ -37,7 +37,7 @@
                 @endforeach
                 </tbody>
             </table>
-            {!! $notifications->render() !!}
+            {!! $notifications->appends(['stage' => $currentStage])->render() !!}
         </div>
     </div>
 @endsection

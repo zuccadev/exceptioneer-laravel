@@ -27,7 +27,7 @@ class Exceptioneer
     public function report(\Exception $e)
     {
         $apiKey = $this->getApiKey();
-        
+
         $stage = $this->getStage();
 
         $notification = $this->parser->createNotification($e, $stage, $apiKey);
