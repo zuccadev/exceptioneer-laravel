@@ -26,7 +26,7 @@ $app->get('/projects/{id}', ['as' => 'project', function($id) use ($app) {
     $notifications = DB::table('notifications')
         ->select(DB::raw('id, code, method, path, exception_class, message, time, COUNT(id) as occurencies, MIN(time) as first, MAX(time) as last'))
         ->where('project_id', '=', $project->id)
-        ->groupBy('message')
+        ->groupBy(DB::raw('message, method, path'))
         ->orderBy('time', 'desc')
         ->get();
 

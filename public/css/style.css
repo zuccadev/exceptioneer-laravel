@@ -1,3 +1,21 @@
+.table > thead > tr > th,
+.table > tbody > tr > td {
+    vertical-align: middle;
+    text-align: center;
+}
+.table > thead > tr > th:first-child,
+.table > tbody > tr > td:first-child {
+    text-align: left;
+}
+
+.container-fluid {
+    max-width: 1600px;
+}
+
 .main-content {
     padding-top: 81px;
+}
+
+h1 {
+    margin-bottom: 30px;
 }
