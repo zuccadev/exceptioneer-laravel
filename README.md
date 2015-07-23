@@ -7,19 +7,10 @@ Bind the exceptioneer handler to the ExceptionHandler contract updating the sing
 
 Register the service provider in `bootstrap/app.php` adding `$app->register(Zuccadev\ExceptioneerLaravel\Lumen\ExceptioneerServiceProvider::class);` in the relative section
 
-Create the `config/exceptioneer.php` file using this as a template
+Add and edit these values to your `.env` file
 ```
-<?php
-
-return [
-
-    'apiKey' => 'yourApiKey!!!',
-
-    'stage' => 'production',
-
-    'endpoint' => 'http://<your.exceptioneer.server.domain>/api/v1/notifications',
-
-    'logInApp' => false
-
-];
+EXCEPTIONEER_KEY=yourApiKey!!!
+EXCEPTIONEER_STAGE=production
+EXCEPTIONEER_SERVER=http://<yourExceptioneerServerDomain>/api/v1/notifications
+EXCEPTIONEER_LOGAPP=false
 ```
