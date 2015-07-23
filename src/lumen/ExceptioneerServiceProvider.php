@@ -18,7 +18,7 @@ class ExceptioneerServiceProvider extends ServiceProvider
     {
         $this->app->configure('exceptioneer');
 
-        $this->app->bind('Zuccadev\ExceptioneerLaravel\HttpClientInterface', GuzzleHttpClient::class);
+        $this->app->bind(HttpClientInterface::class, GuzzleHttpClient::class);
 
         $this->app->bind('exceptioneer', function ($app) {
             $httpClient = $this->app->make(HttpClientInterface::class);
@@ -38,7 +38,8 @@ class ExceptioneerServiceProvider extends ServiceProvider
         $apiKey = config('exceptioneer.apiKey');
         $stage = config('exceptioneer.stage');
         $endpoint = config('exceptioneer.endpoint');
+        $logInApp = config('exceptioneer.logInApp');
 
-        return compact('apiKey', 'stage', 'endpoint');
+        return compact('apiKey', 'stage', 'endpoint', 'logInApp');
     }
 }

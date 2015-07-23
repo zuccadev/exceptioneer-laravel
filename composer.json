@@ -15,10 +15,8 @@
     },
     "minimum-stability": "stable",
     "require": {
-        "hassankhan/config": "0.8.x",
-        "illuminate/support": "5.1.x",
-        "guzzlehttp/guzzle": "6.0.x",
-        "psr/log": "1.0.x",
-        "illuminate/http": "5.1.x"
+        "illuminate/http": "5.1.*",
+        "illuminate/support": "5.1.*",
+        "guzzlehttp/guzzle": "6.0.x"
     }
 }

@@ -24,9 +24,7 @@ class Handler extends ExceptionHandler {
      */
     public function report(Exception $e)
     {
-        app('exceptioneer')->report($e);
-
-        return parent::report($e);
+        return app('exceptioneer')->report($e);
     }
 
     /**
