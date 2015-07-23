@@ -3,6 +3,7 @@
 namespace Zuccadev\ExceptioneerLaravel;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
@@ -21,12 +22,14 @@ class GuzzleHttpClient implements HttpClientInterface
 
     public function send(Notification $notification, $endpoint)
     {
-        $promise = $this->client->postAsync($endpoint, ['json' => $notification->toArray()]);
+        $this->logger->debug('Sending exception to Exceptioneer...');
 
-        $promise->then(function (ResponseInterface $res) {
+        try {
+            $this->client->post($endpoint, ['json' => $notification->toArray()]);
             $this->logger->debug('Exception sent to Exceptioneer');
-        }, function (RequestException $e) {
-            $this->logger->warning('Error while sending the exception to Exceptioneer');
-        });
+        }
+        catch(ClientException $exception) {
+            $this->logger->debug('Error while sending the exception to Exceptioneer');
+        }
     }
 }

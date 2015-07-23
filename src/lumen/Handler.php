@@ -1,6 +1,6 @@
 <?php
 
-namespace Zuccadev\ExceptioneerLaravel;
+namespace Zuccadev\ExceptioneerLaravel\Lumen;
 
 use Exception;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
