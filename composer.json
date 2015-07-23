@@ -13,6 +13,11 @@
             "Zuccadev\\ExceptioneerLaravel\\": "src/"
         }
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    },
     "minimum-stability": "stable",
     "require": {
         "illuminate/http": "5.1.*",
