@@ -10,7 +10,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Zuccadev\\ExceptioneerLaravel": "src/"
+            "Zuccadev\\ExceptioneerLaravel\\": "src/"
         }
     },
     "minimum-stability": "stable",

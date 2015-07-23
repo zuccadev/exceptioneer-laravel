@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__.'/../exceptioneer-laravel/vendor/autoload.php';
 
 Dotenv::load(__DIR__.'/../');
 
@@ -81,7 +82,7 @@ $app->singleton(
 
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
-$app->register(Spescina\Exceptioneer\ExceptioneerServiceProvider::class);
+$app->register(Zuccadev\ExceptioneerLaravel\Lumen\ExceptioneerServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
