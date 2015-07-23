@@ -1,0 +1,24 @@
+{
+    "name": "zuccadev/exceptioneer-laravel",
+    "description": "Exceptioneer client for Laravel and Lumen",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Simone Pescina",
+            "email": "s.pescina@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Zuccadev\\ExceptioneerLaravel": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "hassankhan/config": "0.8.x",
+        "illuminate/support": "5.1.x",
+        "guzzlehttp/guzzle": "6.0.x",
+        "psr/log": "1.0.x",
+        "illuminate/http": "5.1.x"
+    }
+}
