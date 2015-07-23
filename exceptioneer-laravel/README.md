@@ -1,2 +1,2 @@
-# exceptioneer-php
-exceptioneer client for php
+# exceptioneer-laravel
+Exceptioneer client for Laravel and Lumen
