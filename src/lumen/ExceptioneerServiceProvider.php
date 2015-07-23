@@ -35,10 +35,10 @@ class ExceptioneerServiceProvider extends ServiceProvider
 
     protected function loadConfig()
     {
-        $apiKey = config('exceptioneer.apiKey');
-        $stage = config('exceptioneer.stage');
-        $endpoint = config('exceptioneer.endpoint');
-        $logInApp = config('exceptioneer.logInApp');
+        $apiKey = getenv('EXCEPTIONEER_KEY');
+        $stage = getenv('EXCEPTIONEER_STAGE');
+        $endpoint = getenv('EXCEPTIONEER_SERVER');
+        $logInApp = getenv('EXCEPTIONEER_LOGAPP');
 
         return compact('apiKey', 'stage', 'endpoint', 'logInApp');
     }
